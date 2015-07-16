@@ -11,6 +11,37 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/','PagesController@index');
+
+Route::get('/articles',[
+	'as' => 'article.index',
+	'uses' => 'ArticlesController@index'
+	]);
+
+Route::post('/articles',[
+	'as' => 'article.store',
+	'uses' => 'ArticlesController@store',
+	]);
+Route::get('/articles/create',[
+	'as' => 'article.create',
+	'uses' =>'ArticlesController@create'
+	]);
+
+get('/articles/{id}/edit',[
+	'as' => 'article.edit',
+	'uses' => 'ArticlesController@edit'
+	]);
+
+put('/articles/{id}',[
+	'as'	=> 	'article.update' ,
+	'uses'	=>	'ArticlesController@update'
+	]);
+
+Route::get('/articles/{id}',[
+	'as'	=> 	'article.show' ,
+	'uses'	=>	'ArticlesController@show'
+	]);
