@@ -41,6 +41,11 @@ put('/articles/{id}',[
 	'uses'	=>	'ArticlesController@update'
 	]);
 
+delete('/articles/{id}',[
+	'as'	=> 	'article.destroy' ,
+	'uses'	=>	'ArticlesController@destroy'
+	]);
+
 Route::get('/articles/{id}',[
 	'as'	=> 	'article.show' ,
 	'uses'	=>	'ArticlesController@show'

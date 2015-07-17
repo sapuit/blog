@@ -13,10 +13,10 @@ use App\Http\Requests\ArticleFormRequest;
 
 class ArticlesController extends Controller
 {
-    //
+    
 	public function index(){
 
-    	$articles = Article::all();
+    	$articles = Article::paginate(10);
     	return view('articles.index',compact('articles'));
     }
 
@@ -31,7 +31,7 @@ class ArticlesController extends Controller
     	return view('articles.create');
     }
 
-    public function store()
+    public function store(ArticleFormRequest $request)
     {
     	//test
     	// dd(Input::get('title'));
@@ -42,7 +42,8 @@ class ArticlesController extends Controller
     		'title' => $title ,
     		'content' => $content
     		 ]);
-    	return redirect()->route('articles.index');
+
+    	return redirect()->route('article.index');
     }
 
     public function edit($id)
@@ -60,6 +61,14 @@ class ArticlesController extends Controller
             'title' => $request->get('title'),
             'content' => $request->get('content')
             ]);
+
+        return redirect()->route('article.index');
+    }
+
+    public function destroy($id)
+    {
+        $article = Article::find($id);
+        $article->delete();
 
         return redirect()->route('article.index');
     }

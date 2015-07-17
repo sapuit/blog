@@ -16,7 +16,18 @@ Create a new article
 
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">
-			<form action="{{ route('article.store') }}" method="POST" class="form-horizontal">
+			@if (count($errors) > 0 )
+				<div class="alert alert-danger">
+					<strong>Whoops!</strong> thre were some problem with your input.
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+
+			<!-- <form action="{{ route('article.store') }}" method="POST" class="form-horizontal">
 
 				<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
 				
@@ -34,7 +45,19 @@ Create a new article
 					<button class="btn btn-primary">Submit</button>
 				</div>
 
-			</form><!-- form-->
+			</form><! form--> 
+
+			{!! Form::open([
+					'route' => ['article.store'],
+					'method' => 'POST',			
+					'class' => 'form-horizontal'
+				])
+			!!}	
+				
+			@include('articles._form', [ 'button_name' => 'Create' ])
+
+			{!! Form::close() !!}<!-- form-->
+
 		</div>
 	</div><!-- .row -->
 

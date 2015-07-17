@@ -34,21 +34,8 @@ Edit an article
 					'class' => 'form-horizontal'
 				])
 			!!}	
-<!-- 				<input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
- -->			{!! Form::token() !!}
-				<div class="form-group">
-					{!! Form::label('title',' Title', ['class' => 'control-label']) !!}		
-					{!! Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'placehoder'=> 'Fill out title of article', 'required'=>'true' ]) !!}	
-				</div>
-
-				<div class="form-group">
-					{!! Form::label('content', 'Content', ['class' => 'control-label']) !!}		
-					{!! Form::text('content', null, ['id' => 'content', 'class' => 'form-control', 'placehoder'=> 'Fill out content of article', 'required' => 'true' ]) !!}	
-				</div>
-
-				<div class="form-group">
-					{!! Form::submit('Update',[ 'class' => 'btn btn-primary']) !!}
-				</div>
+				
+			@include('articles._form',['button_name'=>'Update'])
 
 			{!! Form::close() !!}<!-- form-->
 		</div>
