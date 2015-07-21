@@ -10,6 +10,12 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+
+    // When a user is successfully authenticated,
+    // they will be redirected to the /articles URI
+    protected $redirectPath = '/articles';
+
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -62,4 +68,6 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+
 }

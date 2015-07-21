@@ -19,6 +19,7 @@ Danh sach bai viet
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">
 			{!! $articles->render() !!}
+			
 		</div>
 	</div>
 </div>		

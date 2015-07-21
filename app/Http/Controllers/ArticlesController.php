@@ -9,47 +9,51 @@ use App\Article;
 use App\Http\Controllers\Controller;
 use Input;
 use App\Http\Requests\ArticleFormRequest;
+use Auth;
 // require_once 'vendor\autoload.php';
 
 class ArticlesController extends Controller
 {
-    
+
 	public function index(){
 
-    	$articles = Article::paginate(10);
-    	return view('articles.index',compact('articles'));
+	$articles = Article::paginate(10);
+	return view('articles.index',compact('articles'));
     }
 
 
     public function show($id){
-
-    	$article = Article::find($id);
-    	return view('articles.show')->with('article',$article) ;	
+        $article = Article::find($id);
+        return view('articles.show')->with('article',$article) ;
     }
 
     public function create(){
-    	return view('articles.create');
+        // check loged
+        if(Auth::check()){  
+            return view('articles.create');
+        }else{
+            return view('auth.login') ;
+        }
     }
 
-    public function store(ArticleFormRequest $request)
-    {
+   public function store(ArticleFormRequest $request)
+   {
     	//test
     	// dd(Input::get('title'));
-    	$title = Input::get('title');
-    	$content= Input::get('content');
+       $title = Input::get('title');
+       $content= Input::get('content');
 
-    	Article::create([
-    		'title' => $title ,
-    		'content' => $content
-    		 ]);
+       Article::create([
+          'title' => $title ,
+          'content' => $content
+          ]);
 
-    	return redirect()->route('article.index');
-    }
+       return redirect()->route('article.index');
+   }
 
-    public function edit($id)
+   public function edit($id)
     {
         $article = Article::find($id);
-
         return view('articles.edit', compact('article'));
     }
 
